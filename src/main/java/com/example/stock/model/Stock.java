@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author Okala III
@@ -29,6 +30,8 @@ public class Stock {
     private String name;
 
     private Double currentPrice;
+
+    private int quantity;
 
     @JsonIgnore
     @CreationTimestamp

@@ -22,7 +22,7 @@ public interface StockService {
 
     StockDto updateStock(Long id, StockDto stock);
 
-    List<StockDto> findAllStocks();
+    List<Stock> findAllStocks();
 
 
 }

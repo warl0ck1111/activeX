@@ -12,12 +12,22 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class StockDto {
 
     private String name;
 
     private Double currentPrice;
 
+    private int quantity;
 
+    public StockDto(String name, Double currentPrice) {
+        this.name = name;
+        this.currentPrice = currentPrice;
+    }
+
+    public StockDto(String name, Double currentPrice, int quantity) {
+        this.name = name;
+        this.currentPrice = currentPrice;
+        this.quantity = quantity;
+    }
 }

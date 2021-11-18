@@ -4,15 +4,11 @@ import com.example.stock.exception.StockNotFoundException;
 import com.example.stock.model.Stock;
 import com.example.stock.model.StockDto;
 import com.example.stock.repository.StockRepository;
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.stock.util.Util.hasValue;
@@ -58,6 +54,7 @@ public class StockServiceImpl implements StockService {
         if(id <= 0) throw new IllegalArgumentException("invalid stock id");
 
         stock = stockRepository.findById(id).orElseThrow(() -> new StockNotFoundException("no stock found"));
+        stockDto = new StockDto();
         BeanUtils.copyProperties(stock, stockDto);
 
         return stockDto;
@@ -93,18 +90,19 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public List<StockDto> findAllStocks() {
-        List<StockDto> stockDtoList = new ArrayList<>();
-        stockRepository.findAll().forEach((stock)->{
-            BeanUtils.copyProperties(stock, stockDto);
-            stockDtoList.add(stockDto);
-        });
-        return stockDtoList;
-    }
-
-    public Page<Stock> findAllStocks(int page, int size){
+    public List<Stock> findAllStocks() {
+        return stockRepository.findAll();
 //        List<StockDto> stockDtoList = new ArrayList<>();
-        return stockRepository.findAll(PageRequest.of(page,size));
-//        return  stockDtoList;
+//        stockRepository.findAll().forEach((stock)->{
+//            BeanUtils.copyProperties(stock, stockDto);
+//            stockDtoList.add(stockDto);
+//        });
+//        return stockDtoList;
     }
+//
+//    public Page<Stock> findAllStocks(int page, int size){
+////        List<StockDto> stockDtoList = new ArrayList<>();
+//        return stockRepository.findAll(PageRequest.of(page,size));
+////        return  stockDtoList;
+//    }
 }

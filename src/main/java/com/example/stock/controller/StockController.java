@@ -5,7 +5,6 @@ import com.example.stock.model.StockDto;
 import com.example.stock.response.ApiResponse;
 import com.example.stock.service.StockServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +45,7 @@ public class StockController {
 
     @GetMapping()
     public ResponseEntity<ApiResponse> getAllStocksAtOnce() {
-        List<StockDto> stocks = stockService.findAllStocks();
+        List<Stock> stocks = stockService.findAllStocks();
         String message = stocks.isEmpty() ?  "No Stocks Available" : "Stocks Retrieved successfully";
 
         return ResponseEntity.ok(new ApiResponse(HttpStatus.OK,message,stocks));
